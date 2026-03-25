@@ -202,8 +202,43 @@
 
     <a href="index.html" class="back-link">← กลับหน้าหลัก</a>
 </div>
-
 <script>
+    let itemsPerPage = 24; // ตั้งค่าว่าอยากให้ 1 หน้ามีสินค้ากี่ชิ้น
+    let currentPage = 1;
+    let filteredItems = [];
+
+    // ฟังก์ชันจัดการการค้นหาและรีเซ็ตหน้า
+    function searchAndReset() {
+        currentPage = 1;
+        updateDisplay();
+    }
+
+    function updateDisplay() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let allCards = document.getElementsByClassName('product-card');
+        filteredItems = [];
+
+        // 1. คัดกรองสินค้าตามคำค้นหา
+        for (let i = 0; i < allCards.length; i++) {
+            let name = allCards[i].getAttribute('data-name').toLowerCase();
+            if (name.includes(input)) {
+                filteredItems.push(allCards[i]);
+            }
+            allCards[i].style.display = "none"; // ซ่อนทุกตัวก่อน
+        }
+
+        // 2. คำนวณการแบ่งหน้า
+        let startIndex = (currentPage - 1) * itemsPerPage;
+        let endIndex = startIndex + itemsPerPage;
+        
+        // 3. แสดงเฉพาะตัวที่อยู่ในหน้านั้นๆ
+        for (let i = startIndex; i < endIndex; i++) {
+            if (filteredItems[i]) {
+                filteredItems[i].style.display = "block";
+            }
+        }
+        renderPagination();
+    }
     function searchFn() {
         let input = document.getElementById('searchInput').value.toLowerCase();
         let cards = document.getElementsByClassName('product-card');
@@ -217,6 +252,29 @@
             }
         }
     }
+        function renderPagination() {
+        let paginationBox = document.getElementById('paginationBox');
+        paginationBox.innerHTML = ""; // ล้างค่าเก่า
+
+        let totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+
+        if (totalPages <= 1) return; // ถ้ามีหน้าเดียวไม่ต้องโชว์ปุ่ม
+
+        for (let i = 1; i <= totalPages; i++) {
+            let btn = document.createElement('button');
+            btn.innerText = i;
+            btn.className = (i === currentPage) ? "page-btn active" : "page-btn";
+            btn.onclick = function() {
+                currentPage = i;
+                updateDisplay();
+                window.scrollTo(0, 0); // เลื่อนขึ้นบนสุดเวลาเปลี่ยนหน้า
+            };
+            paginationBox.appendChild(btn);
+        }
+    }
+
+    // เริ่มต้นการทำงานครั้งแรก
+    updateDisplay();
 </script>
 
 </body>
