@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หมวดเค้ก - Bakery Shop</title>
+    <style>
+        /* ใช้ CSS เหมือนหน้าแรก */
+        body { font-family: 'DB Helvethaica X', sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; }
+        header { background: #ff9f43; color: white; padding: 20px; text-align: center; }
+        .tabs { display: flex; justify-content: center; background: #fff; border-bottom: 2px solid #ddd; }
+        .tab-item { padding: 15px 25px; text-decoration: none; color: #333; font-weight: bold; }
+        .active { border-bottom: 4px solid #ff9f43; color: #ff9f43; }
+        .container { max-width: 800px; margin: 20px auto; padding: 20px; }
+        .product-card { background: lab(100% 0.01 -0.01); padding: 5px; margin-bottom: 5px; border-radius: 8px; border-left: 5px solid #ffffff; }
+        .count-info { margin-bottom: 15px; color: #666; }
+        .container { max-width: 800px; margin: 20px auto; padding: 20px; }
+        .search-box { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 25px; margin-bottom: 20px; }
+        h1 {font-size: 50px;font-weight: bold;color: #ffffff;}
+        a {font-size: 20px;font-weight: bold;color: #000000;}
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>หมวดเค้ก (Cake Category)</h1>
+</header>
+
+
+<div class="tabs">
+    <a href="index.html" class="tab-item">ทั้งหมด</a>
+    <a href="pie.html" class="tab-item">หมวดพาย</a>
+    <a href="cake.html" class="tab-item active">หมวดเค้ก</a>
+    <a href="bread.html" class="tab-item">หมวดขนมปัง</a>
+    <a href="New Product.html" class="tab-item">New Product</a>
+</div>
+<div class="container">
+    <input type="text" id="searchInput" class="search-box" onkeyup="searchFn()" placeholder="ค้นหาขนมที่นี่...">
+
+    <div id="productList">
+<div class="product-card" data-name="ขนมปังพิซซ่าไส้กรอกไก่">
+            <li><a href="https://www.canva.com/design/DAHE2vMNpns/mmnovCqOQGWKiLVdAjqZjg/watch?utm_content=DAHE2vMNpns&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h483f9df481"><h3>ขนมปังพิซซ่าไส้กรอกไก่</h3>
+        </div>
+
+<div class="product-card" data-name="ช็อกโกแลตเพรทเซล">
+            <li><a href="https://www.canva.com/design/DAHE2iPmII8/s1BehAfdGiJlVPWxzt4Fnw/watch?utm_content=DAHE2iPmII8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb923e63d09"><h3>ช็อกโกแลตเพรทเซล</h3>
+        </div>
+
+<div class="product-card" data-name="ชิโอะปังรสซาวโดว์ KS">
+            <li><a href="https://www.canva.com/design/DAHE2rjJN5E/n5wVDUUl4ErEjEu901QngA/watch?utm_content=DAHE2rjJN5E&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h3468c0eaf3"><h3>ชิโอะปังรสซาวโดว์ KS</h3>
+        </div>
+
+<div class="product-card" data-name="ขนมปังเนย">
+            <li><a href="https://www.canva.com/design/DAHE2rdW3oA/E7NDWIHFQRYkdgGj_smCBg/watch?utm_content=DAHE2rdW3oA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h44ad296438"><h3>ขนมปังเนย</h3>
+        </div>
+
+<div class="product-card" data-name="พิซซ่าไก่บาร์บีคิวซอสเทาซัน">
+            <li><a href="https://www.canva.com/design/DAHE2pTKYJY/KvO9oggUw77mi6cRb9rznQ/watch?utm_content=DAHE2pTKYJY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hc6a77d5b6c"><h3>พิซซ่าไก่บาร์บีคิวซอสเทาซัน</h3>
+        </div>
+
+<div class="product-card" data-name="ครีมมี่ครัวซองต์">
+            <li><a href="https://www.canva.com/design/DAHE2v0JtYs/rgm9GESwDdNl0AqNJrv99g/watch?utm_content=DAHE2v0JtYs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h27042b9b52"><h3>ครีมมี่ครัวซองต์</h3>
+        </div>
+    </div>
+</div>
+    <br>
+    <a href="index.html">← กลับหน้าหลัก</a>
+</div>
+<script>
+    function searchFn() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let cards = document.getElementsByClassName('product-card');
+
+        for (let i = 0; i < cards.length; i++) {
+            let name = cards[i].getAttribute('data-name');
+            if (name.toLowerCase().includes(input)) {
+                cards[i].style.display = "";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
