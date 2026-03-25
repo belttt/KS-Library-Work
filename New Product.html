@@ -22,7 +22,8 @@
             box-sizing: border-box; /* ทำให้ padding ไม่ดันขนาดความกว้าง */
             font-family: 'Kanit', sans-serif;
         }
-        @media (min-width: 600px) {
+        @media (min-width: 600px) 
+        body { font-family: 'DB Helvethaica X', sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; }{
             .product-list {
                 grid-template-columns: 1fr 1fr; /* แบ่งเป็น 2 คอลัมน์ */
             }
@@ -30,14 +31,16 @@
         }
 
         /* สำหรับคอมพิวเตอร์ (หน้าจอ 1000px ขึ้นไป) */
-        @media (min-width: 1000px) {
+        @media (min-width: 1000px)
+        body { font-family: 'DB Helvethaica X', sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; }{
             .product-list {
                 grid-template-columns: 1fr 1fr 1fr; /* แบ่งเป็น 3 คอลัมน์ */
             }
         }
 
         /* ปรับแต่งบนมือถือที่จอเล็กมากๆ */
-        @media (max-width: 400px) {
+        @media (max-width: 400px)
+        body { font-family: 'DB Helvethaica X', sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; }{
             .tabs-container {
                 justify-content: flex-start; /* ให้ชิดซ้ายเพื่อไถข้าง */
             }
