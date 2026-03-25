@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Product Kudsan - Bakery Shop</title>
+    <title>New Product - Kudsan</title>
     
     <!-- 1. ดึงฟอนต์ Kanit มาใช้เพื่อให้เหมือนกันทุกเครื่อง -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,7 +62,7 @@
         }
 
         .container { 
-            max-width: 800px; 
+            max-width: 1080px; 
             margin: 20px auto; 
             padding: 0 20px 20px 20px; 
         }
@@ -88,7 +88,7 @@
         .product-card { 
             background: #ffffff; 
             padding: 15px; 
-            border-radius: 12px; 
+            border-radius: 15px; 
             border-left: 5px solid #ff9f43; 
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             transition: 0.3s;
@@ -128,7 +128,7 @@
 
         @media (min-width: 1000px) {
             #productList {
-                grid-template-columns: 1fr 1fr 1fr; /* คอมโชว์แถวละ 3 */
+                grid-template-columns: 1fr 1fr 1fr 1fr; /* คอมโชว์แถวละ 3 */
             }
         }
     </style>
@@ -136,57 +136,51 @@
 <body>
 
 <header>
-    <h1>ขนมปัง (Bread)</h1>
+    <h1>สินค้าขนมปัง (bread)</h1>
 </header>
 
 <div class="tabs">
     <a href="index.html" class="tab-item">ทั้งหมด</a>
-    <a href="pie.html" class="tab-item">หมวดพาย</a>
-    <a href="cake.html" class="tab-item">หมวดเค้ก</a>
-    <a href="bread.html" class="tab-item active">หมวดขนมปัง</a>
     <a href="New Product.html" class="tab-item">New Product</a>
+    <a href="bread.html" class="tab-item active">หมวดขนมปัง</a>
+    <a href="Croissant.html" class="tab-item">หมวดครัวซองต์</a>
+    <a href="pie.html" class="tab-item">หมวดพาย</a>
+    <a href="Danish.html" class="tab-item">หมวดเดนิช</a>
+    <a href="Sandwich.html" class="tab-item">หมวดแซนด์วิช</a>
+    <a href="Donut.html" class="tab-item">หมวดโดนัท</a>
+    <a href="Pizza.html" class="tab-item">หมวดพิซซ่า</a>
+    <a href="Vegan.html" class="tab-item">หมวดสินค้า เจ</a>
 </div>
 
 <div class="container">
     <input type="text" id="searchInput" class="search-box" onkeyup="searchFn()" placeholder="🔍 ค้นหาขนมที่นี่...">
 
     <div id="productList">
-        <!-- สินค้า 1 -->
         <div class="product-card" data-name="ขนมปังพิซซ่าไส้กรอกไก่">
             <a href="https://www.canva.com/design/DAHE2vMNpns/mmnovCqOQGWKiLVdAjqZjg/watch?utm_content=DAHE2vMNpns&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h483f9df481" target="_blank">
                 <h3>ขนมปังพิซซ่าไส้กรอกไก่</h3>
             </a>
         </div>
-
-        <!-- สินค้า 2 -->
         <div class="product-card" data-name="ช็อกโกแลตเพรทเซล">
             <a href="https://www.canva.com/design/DAHE2iPmII8/s1BehAfdGiJlVPWxzt4Fnw/watch?utm_content=DAHE2iPmII8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb923e63d09" target="_blank">
                 <h3>ช็อกโกแลตเพรทเซล</h3>
             </a>
         </div>
-
-        <!-- สินค้า 3 -->
         <div class="product-card" data-name="ชิโอะปังรสซาวโดว์ KS">
             <a href="https://www.canva.com/design/DAHE2rjJN5E/n5wVDUUl4ErEjEu901QngA/watch?utm_content=DAHE2rjJN5E&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h3468c0eaf3" target="_blank">
                 <h3>ชิโอะปังรสซาวโดว์ KS</h3>
             </a>
         </div>
-
-        <!-- สินค้า 4 -->
         <div class="product-card" data-name="ขนมปังเนย">
             <a href="https://www.canva.com/design/DAHE2rdW3oA/E7NDWIHFQRYkdgGj_smCBg/watch?utm_content=DAHE2rdW3oA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h44ad296438" target="_blank">
                 <h3>ขนมปังเนย</h3>
             </a>
         </div>
-
-        <!-- สินค้า 5 -->
         <div class="product-card" data-name="พิซซ่าไก่บาร์บีคิวซอสเทาซัน">
             <a href="https://www.canva.com/design/DAHE2pTKYJY/KvO9oggUw77mi6cRb9rznQ/watch?utm_content=DAHE2pTKYJY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hc6a77d5b6c" target="_blank">
                 <h3>พิซซ่าไก่บาร์บีคิวซอสเทาซัน</h3>
             </a>
         </div>
-
-        <!-- สินค้า 6 -->
         <div class="product-card" data-name="ครีมมี่ครัวซองต์">
             <a href="https://www.canva.com/design/DAHE2v0JtYs/rgm9GESwDdNl0AqNJrv99g/watch?utm_content=DAHE2v0JtYs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h27042b9b52" target="_blank">
                 <h3>ครีมมี่ครัวซองต์</h3>
