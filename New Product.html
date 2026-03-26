@@ -5,134 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Product - Kudsan</title>
     
-    <!-- 1. ดึงฟอนต์ Kanit มาใช้เพื่อให้เหมือนกันทุกเครื่อง -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-        <style>
-        /* 2. ตั้งค่าพื้นฐาน */
-        * {
-            box-sizing: border-box;
-            font-family: 'Kanit', sans-serif; /* ใช้ฟอนต์ Kanit ทั้งหมด */
+    <style>
+        * { box-sizing: border-box; font-family: 'Kanit', sans-serif; }
+        body { background-color: #f8f9fa; margin: 0; padding: 0; color: #333; }
+
+        header { background: #ff9f43; color: white; padding: 30px 20px; text-align: center; }
+        header h1 { font-size: 36px; margin: 0; color: #ffffff; }
+
+        /* --- ระบบ Navigation Tabs & Dropdown --- */
+        .nav-container {
+            background: #fff;
+            border-bottom: 2px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        body { 
-            background-color: #f8f9fa; 
-            margin: 0; 
-            padding: 0; 
-            color: #333;
-        }
-
-        header { 
-            background: #ff9f43; 
-            color: white; 
-            padding: 30px 20px; 
-            text-align: center; 
-        }
-
-        header h1 {
-            font-size: 36px; /* ปรับขนาดให้พอดีกับมือถือ */
-            font-weight: bold;
+        .tabs {
+            display: flex;
+            justify-content: center;
+            list-style: none;
             margin: 0;
-            color: #ffffff;
+            padding: 0;
         }
 
-        /* แถบเมนู Tabs */
-        .tabs { 
-            display: flex; 
-            justify-content: center; 
-            background: #fff; 
-            border-bottom: 2px solid #ddd; 
-            overflow-x: auto; /* ให้มือถือปัดซ้ายขวาได้ถ้าเมนูยาว */
-            white-space: nowrap;
+        .tab-item {
+            position: relative;
         }
 
-        .tab-item { 
-            padding: 15px 20px; 
-            text-decoration: none; 
-            color: #333; 
+        .tab-link {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #333;
             font-weight: bold;
             font-size: 16px;
+            transition: 0.3s;
         }
 
-        .active { 
-            border-bottom: 4px solid #ff9f43; 
-            color: #ff9f43; 
+        .tab-link:hover, .tab-item:hover > .tab-link {
+            color: #ff9f43;
+            background: #fff8f0;
         }
 
-        .container { 
-            max-width: 1080px; 
-            margin: 20px auto; 
-            padding: 0 20px 20px 20px; 
+        /* เมนูย่อย (Dropdown) */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+            list-style: none;
+            padding: 10px 0;
+            z-index: 1001;
         }
+
+        .dropdown-menu li a {
+            padding: 10px 20px;
+            text-decoration: none;
+            display: block;
+            color: #555;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .dropdown-menu li a:hover {
+            background: #ff9f43;
+            color: #fff;
+        }
+
+        /* แสดงเมนูย่อยเมื่อ Hover (สำหรับคอมพิวเตอร์) */
+        .tab-item:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* สำหรับหน้าปัจจุบัน */
+        .active-link {
+            border-bottom: 4px solid #ff9f43;
+            color: #ff9f43 !important;
+        }
+
+        /* --- ส่วนเนื้อหา --- */
+        .container { max-width: 1080px; margin: 20px auto; padding: 0 20px 20px 20px; }
 
         .search-box { 
-            width: 100%; 
-            padding: 15px; 
-            border: 1px solid #ccc; 
-            border-radius: 25px; 
-            margin-top: 20px;
-            margin-bottom: 20px; 
-            font-size: 16px;
-            outline: none;
+            width: 100%; padding: 15px; border: 2px solid #ff9f43; border-radius: 25px; 
+            margin-top: 20px; margin-bottom: 20px; font-size: 16px; outline: none;
         }
 
-        /* สไตล์การ์ดสินค้า */
         #productList {
             display: grid;
-            grid-template-columns: 1fr; /* มือถือโชว์แถวละ 1 */
+            grid-template-columns: 1fr;
             gap: 15px;
         }
 
         .product-card { 
-            background: #ffffff; 
-            padding: 15px; 
-            border-radius: 12px; 
-            border-left: 5px solid #ff9f43; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            background: #ffffff; padding: 15px; border-radius: 12px; 
+            border-left: 5px solid #ff9f43; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             transition: 0.3s;
         }
 
-        .product-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
+        .product-card:hover { transform: translateY(-3px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .product-card a { text-decoration: none; color: #000; }
+        .product-card h3 { margin: 0; font-size: 18px; }
 
-        .product-card a {
-            text-decoration: none;
-            color: #000;
-        }
-
-        .product-card h3 {
-            margin: 0;
-            font-size: 18px;
-        }
-
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 30px;
-            text-decoration: none;
-            color: #666;
-            font-weight: bold;
-        }
-         .pagination { 
-            display: flex; justify-content: center; gap: 10px; margin-top: 30px; 
-        }
+        .pagination { display: flex; justify-content: center; gap: 10px; margin-top: 30px; }
         .page-btn { 
             padding: 10px 18px; border: 1px solid #ff9f43; background: white; 
             color: #ff9f43; border-radius: 8px; cursor: pointer; font-weight: bold;
-            transition: 0.3s;
         }
         .page-btn.active { background: #ff9f43; color: white; }
-        .page-btn:hover:not(.active) { background: #fff3e0; }
 
-        /* --- Media Queries สำหรับหน้าจอใหญ่ (iPad / PC) --- */
-        @media (min-width: 600px) {
-            #productList {grid-template-columns: 1fr 1fr; /* ไอแพดโชว์แถวละ 2 */} header h1 { font-size: 45px; }}
+        /* --- Responsive สำหรับมือถือ --- */
+        @media (max-width: 768px) {
+            header h1 { font-size: 28px; }
+            .tabs {
+                overflow-x: auto;
+                justify-content: flex-start;
+                white-space: nowrap;
+            }
+            /* ในมือถือ ถ้าเมนูย่อยใช้งานยาก อาจจะปรับเป็นแถวเลื่อนปกติ หรือใช้ JS ช่วย */
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                border: none;
+                background: #fdfdfd;
+                padding-left: 20px;
+            }
+            /* แสดงเมนูย่อยในมือถือแบบแสดงตลอดหรือตามคลิก */
+            .tab-item:active .dropdown-menu { display: block; } 
+        }
 
-        @media (min-width: 1000px) {#productList {grid-template-columns: 1fr 1fr 1fr 1fr; /* คอมโชว์แถวละ 3 */ }}
+        @media (min-width: 600px) { #productList { grid-template-columns: 1fr 1fr; } }
+        @media (min-width: 1000px) { #productList { grid-template-columns: 1fr 1fr 1fr 1fr; } }
     </style>
 </head>
 <body>
@@ -141,63 +153,74 @@
     <h1>สินค้าใหม่ (New Product)</h1>
 </header>
 
-<div class="tabs">
-    <a href="index.html" class="tab-item">ทั้งหมด</a>
-    <a href="New Product.html" class="tab-item active">New Product</a>
-    <a href="bread.html" class="tab-item">หมวดขนมปัง</a>
-    <a href="Croissant.html" class="tab-item">หมวดครัวซองต์</a>
-    <a href="pie.html" class="tab-item">หมวดพาย</a>
-    <a href="Danish.html" class="tab-item">หมวดเดนิช</a>
-    <a href="Sandwich.html" class="tab-item">หมวดแซนด์วิช</a>
-    <a href="Donut.html" class="tab-item">หมวดโดนัท</a>
-    <a href="Pizza.html" class="tab-item">หมวดพิซซ่า</a>
-    <a href="Vegan.html" class="tab-item">หมวดสินค้า เจ</a>
-</div>
+<!-- ระบบ Tabs แบบมี Dropdown -->
+<nav class="nav-container">
+    <ul class="tabs">
+        <li class="tab-item"><a href="index.html" class="tab-link">Home</a></li>
+        
+        <li class="tab-item">
+            <a href="#" class="tab-link active-link">เบเกอรี่ ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="New Product.html">สินค้าใหม่ (New)</a></li>
+                <li><a href="bread.html">หมวดขนมปัง</a></li>
+                <li><a href="Croissant.html">หมวดครัวซองต์</a></li>
+                <li><a href="pie.html">หมวดพาย</a></li>
+                <li><a href="Danish.html">หมวดเดนิช</a></li>
+                <li><a href="Sandwich.html">หมวดแซนด์วิช</a></li>
+                <li><a href="Donut.html">หมวดโดนัท</a></li>
+                <li><a href="Pizza.html">หมวดพิซซ่า</a></li>
+            </ul>
+        </li>
+
+        <li class="tab-item">
+            <a href="#" class="tab-link">เครื่องดื่ม ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="coffee.html">กาแฟ (Coffee)</a></li>
+                <li><a href="smoothie.html">สมูทตี้ (Smoothie)</a></li>
+                <li><a href="tea.html">ชา (Tea)</a></li>
+            </ul>
+        </li>
+
+        <li class="tab-item">
+            <a href="#" class="tab-link">ความรู้เพิ่มเติม ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="how-to.html">วิธีการอุ่นขนม</a></li>
+                <li><a href="story.html">เรื่องราวของ Kudsan</a></li>
+                <li><a href="Vegan.html">สินค้า เจ (Vegan)</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
 
 <div class="container">
-    <input type="text" id="searchInput" class="search-box" onkeyup="searchFn()" placeholder="🔍 ค้นหาขนมที่นี่...">
+    <input type="text" id="searchInput" class="search-box" onkeyup="searchAndReset()" placeholder="🔍 ค้นหาขนมที่นี่...">
 
     <div id="productList">
+        <!-- รายการสินค้า (ใช้รายการเดิมของคุณ) -->
         <div class="product-card" data-name="ขนมปังพิซซ่าไส้กรอกไก่">
-            <a href="https://www.canva.com/design/DAHE2vMNpns/mmnovCqOQGWKiLVdAjqZjg/watch?utm_content=DAHE2vMNpns&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h483f9df481" target="_blank">
-                <h3>ขนมปังพิซซ่าไส้กรอกไก่</h3>
-            </a>
+            <a href="#" target="_blank"><h3>1. ขนมปังพิซซ่าไส้กรอกไก่</h3></a>
         </div>
         <div class="product-card" data-name="ช็อกโกแลตเพรทเซล">
-            <a href="https://www.canva.com/design/DAHE2iPmII8/s1BehAfdGiJlVPWxzt4Fnw/watch?utm_content=DAHE2iPmII8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hb923e63d09" target="_blank">
-                <h3>ช็อกโกแลตเพรทเซล</h3>
-            </a>
+            <a href="#" target="_blank"><h3>2. ช็อกโกแลตเพรทเซล</h3></a>
         </div>
         <div class="product-card" data-name="ชิโอะปังรสซาวโดว์ KS">
-            <a href="https://www.canva.com/design/DAHE2rjJN5E/n5wVDUUl4ErEjEu901QngA/watch?utm_content=DAHE2rjJN5E&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h3468c0eaf3" target="_blank">
-                <h3>ชิโอะปังรสซาวโดว์ KS</h3>
-            </a>
+            <a href="#" target="_blank"><h3>3. ชิโอะปังรสซาวโดว์ KS</h3></a>
         </div>
         <div class="product-card" data-name="ขนมปังเนย">
-            <a href="https://www.canva.com/design/DAHE2rdW3oA/E7NDWIHFQRYkdgGj_smCBg/watch?utm_content=DAHE2rdW3oA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h44ad296438" target="_blank">
-                <h3>ขนมปังเนย</h3>
-            </a>
+            <a href="#" target="_blank"><h3>4. ขนมปังเนย</h3></a>
         </div>
-        <div class="product-card" data-name="พิซซ่าไก่บาร์บีคิวซอสเทาซัน">
-            <a href="https://www.canva.com/design/DAHE2pTKYJY/KvO9oggUw77mi6cRb9rznQ/watch?utm_content=DAHE2pTKYJY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hc6a77d5b6c" target="_blank">
-                <h3>พิซซ่าไก่บาร์บีคิวซอสเทาซัน</h3>
-            </a>
-        </div>
-        <div class="product-card" data-name="ครีมมี่ครัวซองต์">
-            <a href="https://www.canva.com/design/DAHE2v0JtYs/rgm9GESwDdNl0AqNJrv99g/watch?utm_content=DAHE2v0JtYs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h27042b9b52" target="_blank">
-                <h3>ครีมมี่ครัวซองต์</h3>
-            </a>
-        </div>
+        <!-- เพิ่มสินค้าตัวอื่นๆ ต่อได้เลยครับ -->
     </div>
+
     <div class="pagination" id="paginationBox"></div>
-<a href="index.html" class="back-link">← กลับหน้าหลัก</a></div>
+    <a href="index.html" style="display:block; text-align:center; margin-top:30px; color:#666; text-decoration:none; font-weight:bold;">← กลับหน้าหลัก</a>
+</div>
 
 <script>
-    let itemsPerPage = 24; // ตั้งค่าว่าอยากให้ 1 หน้ามีสินค้ากี่ชิ้น
+    let itemsPerPage = 12; // ปรับจำนวนต่อหน้าตามต้องการ
     let currentPage = 1;
     let filteredItems = [];
 
-    // ฟังก์ชันจัดการการค้นหาและรีเซ็ตหน้า
     function searchAndReset() {
         currentPage = 1;
         updateDisplay();
@@ -208,20 +231,17 @@
         let allCards = document.getElementsByClassName('product-card');
         filteredItems = [];
 
-        // 1. คัดกรองสินค้าตามคำค้นหา
         for (let i = 0; i < allCards.length; i++) {
             let name = allCards[i].getAttribute('data-name').toLowerCase();
             if (name.includes(input)) {
                 filteredItems.push(allCards[i]);
             }
-            allCards[i].style.display = "none"; // ซ่อนทุกตัวก่อน
+            allCards[i].style.display = "none";
         }
 
-        // 2. คำนวณการแบ่งหน้า
         let startIndex = (currentPage - 1) * itemsPerPage;
         let endIndex = startIndex + itemsPerPage;
         
-        // 3. แสดงเฉพาะตัวที่อยู่ในหน้านั้นๆ
         for (let i = startIndex; i < endIndex; i++) {
             if (filteredItems[i]) {
                 filteredItems[i].style.display = "block";
@@ -229,26 +249,12 @@
         }
         renderPagination();
     }
-    function searchFn() {
-        let input = document.getElementById('searchInput').value.toLowerCase();
-        let cards = document.getElementsByClassName('product-card');
 
-        for (let i = 0; i < cards.length; i++) {
-            let name = cards[i].getAttribute('data-name');
-            if (name.toLowerCase().includes(input)) {
-                cards[i].style.display = "block";
-            } else {
-                cards[i].style.display = "none";
-            }
-        }
-    }
-        function renderPagination() {
+    function renderPagination() {
         let paginationBox = document.getElementById('paginationBox');
-        paginationBox.innerHTML = ""; // ล้างค่าเก่า
-
+        paginationBox.innerHTML = "";
         let totalPages = Math.ceil(filteredItems.length / itemsPerPage);
-
-        if (totalPages <= 1) return; // ถ้ามีหน้าเดียวไม่ต้องโชว์ปุ่ม
+        if (totalPages <= 1) return;
 
         for (let i = 1; i <= totalPages; i++) {
             let btn = document.createElement('button');
@@ -257,13 +263,13 @@
             btn.onclick = function() {
                 currentPage = i;
                 updateDisplay();
-                window.scrollTo(0, 0); // เลื่อนขึ้นบนสุดเวลาเปลี่ยนหน้า
+                window.scrollTo(0, 0);
             };
             paginationBox.appendChild(btn);
         }
     }
 
-    // เริ่มต้นการทำงานครั้งแรก
+    // รันครั้งแรก
     updateDisplay();
 </script>
 
